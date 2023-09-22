@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 class ImageCard extends StatelessWidget{
   final String authorName;
   final String imageUrl;
-  final bool isFavorite;
+  final Function() onTapFavorite;
 
-  const ImageCard({super.key, required this.authorName,required this.imageUrl, required this.isFavorite});
+  const ImageCard({super.key,
+    required this.authorName,
+    required this.imageUrl,
+    required this.onTapFavorite,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +39,17 @@ class ImageCard extends StatelessWidget{
               ),
             ),
             TextButton.icon(
-              onPressed: () {},
+              onPressed: onTapFavorite, // Toggle the favorite status
               icon: const Icon(
-                Icons.favorite_border,
+                // isFavorite ? Icons.favorite : Icons.favorite_border,
+                Icons.favorite,
                 color: Colors.redAccent,
               ),
               label: const Text(
-                'Add to Favorites',
-                style: TextStyle(
-                  color: Colors.redAccent,
+                  // isFavorite ? 'Remove from Favorites' : 'Add to Favorites',
+                  'Add to favorites',
+                  style: TextStyle(
+                    color: Colors.redAccent,
                 )
               )
             )

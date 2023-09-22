@@ -25,12 +25,13 @@ void main() {
         child: ImageCard(
           authorName: 'John Doe',
           imageUrl: 'https://example.com/image.jpg',
+          onTapFavorite: () { },
         ),
         ),
       );
     });
 
-    // Verify that our card and its contents exsist
+    // Verify that our card and its contents exist
     expect(find.byType(Card),findsOneWidget);
     expect(find.text("John Doe"),findsOneWidget);
     expect(find.byType(Image),findsOneWidget);
