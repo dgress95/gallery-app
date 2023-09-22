@@ -5,29 +5,32 @@ import 'package:flutter/material.dart';
 class ImageCard extends StatelessWidget{
   final String authorName;
   final String imageUrl;
-  final Function() onTapFavorite;
+  final bool isFavorite;
+  final Function()? onTapFavorite;
 
   const ImageCard({super.key,
     required this.authorName,
     required this.imageUrl,
+    required this.isFavorite,
     required this.onTapFavorite,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      surfaceTintColor: Colors.deepPurple,
-      elevation: 2,
+      color: Colors.grey[100],
+      elevation: 3,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8.0,30.0,8.0,30.0),
+        padding: const EdgeInsets.fromLTRB(8.0,80.0,8.0,30.0),
         child: Flex(
           direction: Axis.vertical,
-          children: [ 
+          children: [
             Text(
               authorName,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 18.0,
+                fontWeight: FontWeight.w500,
               )
             ),
             Flexible(
@@ -39,17 +42,18 @@ class ImageCard extends StatelessWidget{
               ),
             ),
             TextButton.icon(
-              onPressed: onTapFavorite, // Toggle the favorite status
-              icon: const Icon(
-                // isFavorite ? Icons.favorite : Icons.favorite_border,
-                Icons.favorite,
-                color: Colors.redAccent,
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(Colors.teal[800]!),
               ),
-              label: const Text(
-                  // isFavorite ? 'Remove from Favorites' : 'Add to Favorites',
-                  'Add to favorites',
-                  style: TextStyle(
-                    color: Colors.redAccent,
+                onPressed: onTapFavorite != null ? onTapFavorite! : () {}, // Toggle the favorite status
+              icon: Icon(
+                isFavorite ? Icons.favorite_border : Icons.favorite,
+                color: Colors.white,
+              ),
+              label: Text(
+                  isFavorite ? 'Remove from Favorites'.toUpperCase() : 'Add to Favorites'.toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.white,
                 )
               )
             )
