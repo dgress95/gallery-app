@@ -35,5 +35,43 @@ void main(){
       when(httpClient.get(any)).thenAnswer((_) async => http.Response(jsonEncode(mockWebImage),200));
       expect(imageWebService.fetchWebImageInfo(1),isA<Future<WebImage>>());
     });
+
+
+    test("Return list of web images if http completes successfully", () async {
+      final httpClient = MockClient();
+      imageWebService = ImageWebService(httpClient);
+
+      // Mocking a successful HTTP response
+      when(httpClient.get(Uri.parse(endPoints.getListOfImages())))
+          .thenAnswer((_) async => http.Response(jsonEncode([mockWebImage]), 200));
+
+      final result = await imageWebService.fetchListOfWebImages();
+
+      expect(result, isA<WebImageList>());
+      expect(result.webimages.length, 1);
+      expect(result.webimages[0], isA<WebImage>());
+    });
+
+    test("Throw an exception if http call for list of web images completes with an error", () async {
+      final httpClient = MockClient();
+      imageWebService = ImageWebService(httpClient);
+
+      // Mocking an error HTTP response
+      when(httpClient.get(Uri.parse(endPoints.getListOfImages())))
+          .thenAnswer((_) async => http.Response('Server Error', 500));
+
+      try {
+        await imageWebService.fetchListOfWebImages();
+        fail("Expected an exception to be thrown");
+      } catch (e) {
+        expect(e, isA<Exception>());
+        expect(e.toString(), contains('500'));
+        expect(e.toString(), contains('Exception: 500'));
+      }
+    });
+
   });
 }
+
+
+

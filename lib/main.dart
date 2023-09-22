@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_gallery/network/endpoints.dart';
 import 'package:flutter_app_gallery/widgets/imageCard.dart';
+import 'package:flutter_app_gallery/models/webimage.dart';
+import 'package:flutter_app_gallery/models/webImageList.dart';
+import 'package:flutter_app_gallery/network/imageService.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   EndPoints endPoints = EndPoints();
-  String authorName = "Author of Image";
+  final ImageWebService imageWebService = ImageWebService(http.Client());
 
 
   @override
@@ -43,10 +47,31 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body:  Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: ImageCard(authorName:authorName,imageUrl:endPoints.getImageSize(400,400)),
+      body: FutureBuilder<WebImageList>(
+        future: imageWebService.fetchListOfWebImages(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+        } else {
+          List<WebImage> images = snapshot.data!.webimages;
+          return ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: images.length,
+            itemBuilder: (context, index) {
+                return SizedBox(
+                  width: 400.0,
+                  height: 450.0,
+                  child: ImageCard(
+                    authorName: images[index].author,
+                    imageUrl: images[index].download_url,
+                  ),
+                );
+                },
+            );
+          }
+        },
       ),
     );
   }
