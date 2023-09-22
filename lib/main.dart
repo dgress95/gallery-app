@@ -66,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: ImageCard(
                     authorName: images[index].author,
                     imageUrl: images[index].download_url,
+                    isFavorite: false,
                   ),
                 );
                 },
