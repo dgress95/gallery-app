@@ -32,6 +32,7 @@ class FavoritesPageState extends State<FavoritesPage> {
         centerTitle: true,
       ),
       body: ListView.builder(
+        scrollDirection: Axis.horizontal,
         itemCount: widget.favoriteImages.length,
         itemBuilder: (context, index) {
           return SizedBox(

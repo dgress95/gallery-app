@@ -21,11 +21,9 @@ class _HomeState extends State<Home> {
   final ImageWebService imageWebService = ImageWebService(http.Client());
   List<WebImage> favoriteImages = [];
 
-  void toggleFavorite(WebImage image) {
+  void addFavorite(WebImage image) {
     setState(() {
-      if (favoriteImages.contains(image)) {
-        favoriteImages.remove(image);
-      } else {
+      if (!favoriteImages.any((favImage) => favImage.id == image.id)) {
         favoriteImages.add(image);
       }
     });
@@ -65,7 +63,7 @@ class _HomeState extends State<Home> {
       body: FutureBuilder<WebImageList>(
         future: imageWebService.fetchListOfWebImages(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState != ConnectionState.done) {
             return const Center(
               child: SpinKitRing(
                 color: Colors.teal,
@@ -78,7 +76,7 @@ class _HomeState extends State<Home> {
             List<WebImage> images = snapshot.data!.webimages;
             return ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: images.length,
+              itemCount: 20, // limit to 20 items per requirements
               itemBuilder: (context, index) {
                 WebImage currentImage = images[index];
                 bool isFavorite = favoriteImages.contains(currentImage);
@@ -90,7 +88,7 @@ class _HomeState extends State<Home> {
                     imageUrl: currentImage.download_url,
                     isFavorite: isFavorite,
                     onTapFavorite: () {
-                      toggleFavorite(currentImage);
+                      addFavorite(currentImage);
                     },
                   ),
                 );
