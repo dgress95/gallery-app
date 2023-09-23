@@ -6,7 +6,7 @@ class ImageCard extends StatelessWidget{
   final String authorName;
   final String imageUrl;
   final bool isFavorite;
-  final Function()? onTapFavorite;
+  final Function()? onTapFavorite; // optional function for adding image card to favorites
 
   const ImageCard({super.key,
     required this.authorName,

@@ -14,7 +14,7 @@ class FavoritesPage extends StatefulWidget {
 class FavoritesPageState extends State<FavoritesPage> {
   void removeFromFavorites(WebImage image) {
     setState(() {
-      widget.favoriteImages.remove(image);
+      widget.favoriteImages.remove(image); // allows user to remove image from favorites
     });
   }
 

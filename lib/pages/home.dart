@@ -19,11 +19,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   EndPoints endPoints = EndPoints();
   final ImageWebService imageWebService = ImageWebService(http.Client());
-  List<WebImage> favoriteImages = [];
+  List<WebImage> favoriteImages = []; // stores favorite images
 
   void addFavorite(WebImage image) {
     setState(() {
-      if (!favoriteImages.any((favImage) => favImage.id == image.id)) {
+      if (!favoriteImages.any((favImage) => favImage.id == image.id)) { // avoids duplicate favorites
         favoriteImages.add(image);
       }
     });
@@ -45,14 +45,14 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite),
             color: Colors.white70,
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => FavoritesPage(
-                    favoriteImages: favoriteImages, //
+                    favoriteImages: favoriteImages, // passes favoriteImages to favorites page
                   ),
                 ),
               );
