@@ -1,42 +1,60 @@
-# Gallery App
-Welcome Ascent Applicant!
+# Image Gallery App
 
-Today you will be completing a Flutter Assessment , it should take 2-3 hours to complete entirely.
+## Overview
 
-## Getting Started
-You are tasked with completing our image viewing app. Some parts of the app have been pre-written for you. It is up to you if you choose to utilize this template or freshly re-write the application.
-Be cognizant of your time and abilities when considering this choice.
+The Image Gallery App is a mobile application that allows users to explore a curated collection of images. Users can view images, mark them as favorites, and access their favorite images in a dedicated Favorites section.
 
-## Skills Assessed
-- Full coverage testing
-- Network calling
-- Flutter UI manipulation
-- Data object management
+## Features
 
-### ToDo
+### 1. Viewing Images
 
-We are using the following api to fetch images from the internet: https://picsum.photos/
+- The app displays a collection of images, each accompanied by the author's name.
+- Users can scroll horizontally to view different images.
 
-After fetching the image we populate a Card with the image author's name and the image under the title. Look below for card UI references.
+### 2. Adding to Favorites
 
-![image](https://github.com/Dgolme1/flutter_app_gallery/assets/82067568/4f10eff1-adca-44e9-b121-34ddeb37aa43)
+- Each image has a button labeled "Add to Favorites". When tapped, the image is marked as a favorite.
+- Marked favorites have a filled heart icon, while unmarked ones have an outlined heart icon.
+
+### 3. Favorites Section
+
+- Users can access their favorite images by tapping the heart icon in the app bar.
+- The Favorites section displays a list of favorite images, including the author's name.
+
+### 4. Removing from Favorites
+
+- In the Favorites section, users can tap the heart icon on a favorite image to remove it from the list.
+
+## Usage
+
+1. **Viewing Images:**
+   - Open the app to view a collection of images.
+   - Swipe left or right to explore different images.
+
+2. **Adding to Favorites:**
+   - Tap the "Add to Favorites" button below an image to mark it as a favorite.
+   - The button will change to "Remove from Favorites" if the image is already a favorite.
+
+3. **Accessing Favorites:**
+   - Tap the heart icon in the app bar to navigate to the Favorites section.
+   - Here, you'll find a list of your favorite images.
+
+4. **Removing from Favorites:**
+   - In the Favorites section, tap the heart icon below an image to remove it from your favorites.
 
 
-We want to populate the screen with a horizontally scrolling list of these image cards. Look below for UI references.
-We want to be able to scroll to new images seamlessly and scroll back, up to 20 previous images. 
+## Technologies Used
 
-![image](https://github.com/Dgolme1/flutter_app_gallery/assets/82067568/13388c6c-40cc-4880-a79d-0e3556ef29dc)
+- Flutter
+- Dart
+- HTTP Package (for network requests)
 
+## Running the App
 
-### When Finished
-When you have completed the assessment, email molly@ascentitech.com with the link to your new repository and answer the following questions as honestly as you can.
+To run the app locally, follow these steps:
 
-### Final Questions
-1) How long did the assessment take to complete? Was there any task that took significantly longer than the others, and if so why?
-2) Were there any tasks that you initially did not know how to complete? And if so, how did you approach them and take the steps to learn how to complete them? (It's okay if the answer is yes! Everyone learns on the job at some point)
-3) Was this assessment feasible for the time given and relatively easy to follow? Any points of feedback?
-
-
-#### Bonus
-If you have some extra time and would like to really impress, you should add a likes feature. This means adding a like icon button the the cards and favorites page that shows all the previously liked images!
-
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Ensure you have Flutter and Dart SDK installed.
+4. Run `flutter pub get` to install dependencies.
+5. Use `flutter run` to launch the app on your preferred device/emulator.
