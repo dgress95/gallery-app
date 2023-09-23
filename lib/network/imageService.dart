@@ -11,9 +11,8 @@ class ImageWebService{
   final EndPoints endPoints = EndPoints();
 
   ImageWebService(this._client);
-  
-  //HINT: Consider creating an api call to collect a list of web image info (endpoints.getListOfImages)
-  // This function fetches a list of images and parses them into a list of web image objects
+
+  // fetches a list of images and parses them into a list of web image objects
   Future<WebImageList> fetchListOfWebImages() async {
     try{
       final response = await _client.get(Uri.parse(endPoints.getListOfImages()));

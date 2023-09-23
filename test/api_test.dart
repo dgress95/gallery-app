@@ -36,6 +36,21 @@ void main(){
       expect(imageWebService.fetchWebImageInfo(1),isA<Future<WebImage>>());
     });
 
+    test('getImageSize Test', () {
+      // Define sample width and height
+      final int width = 800;
+      final int height = 600;
+
+      // Call the getImageSize function
+      final String imageUrl = endPoints.getImageSize(width, height);
+
+      // Define the expected result based on baseUrl, width, and height
+      final String expectedUrl = 'https://picsum.photos/$width/$height';
+
+      // Verify that the returned URL matches the expected result
+      expect(imageUrl, expectedUrl);
+    });
+
 
     test("Return list of web images if http completes successfully", () async {
       final httpClient = MockClient();

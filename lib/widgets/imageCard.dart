@@ -47,11 +47,11 @@ class ImageCard extends StatelessWidget{
               ),
                 onPressed: onTapFavorite != null ? onTapFavorite! : () {}, // Toggle the favorite status
               icon: Icon(
-                isFavorite ? Icons.favorite_border : Icons.favorite,
+                isFavorite ? Icons.favorite_border : Icons.favorite, // change icon based on favorite status
                 color: Colors.white,
               ),
               label: Text(
-                  isFavorite ? 'Remove from Favorites'.toUpperCase() : 'Add to Favorites'.toUpperCase(),
+                  isFavorite ? 'Remove from Favorites'.toUpperCase() : 'Add to Favorites'.toUpperCase(), // change text based on favorite status
                   style: const TextStyle(
                     color: Colors.white,
                 )
